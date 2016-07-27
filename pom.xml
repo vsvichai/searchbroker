@@ -2,7 +2,82 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.khalibre.searchbroker</groupId>
-	<artifactId>khalibre-assignment</artifactId>
+	<artifactId>search-broker</artifactId>
 	<packaging>war</packaging>
-	<name>Khalibre Assignment</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Search Broker</name>
+	
+	<url>https://github.com/vunvichai/searchbroker</url>
+	
+	<description>
+        The Search Broker, acting as a git search API, provides a mean to search all repositories at github.com
+    </description>
+    
+    <scm>
+        <connection>scm:git:git://github.com/vunvichai/searchbroker.git</connection>
+        <developerConnection>scm:git:git@github.com:vunvichai/searchbroker.git</developerConnection>
+        <url>https://github.com/vunvichai/searchbroker.git</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/vunvichai/searchbroker/issues</url>
+    </issueManagement>
+    
+    <distributionManagement>
+        <snapshotRepository>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
+    <developers>
+        <developer>
+            <id>vunvichai</id>
+            <name>Vichai VUN</name>
+            <email>vun.vichai@gmail.com</email>
+            <roles>
+                <role>Original Author</role>
+            </roles>
+        </developer>
+    </developers>
+    
+    <build>
+        <plugins>
+            <plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>khalibre-assignment-vunvichai</warName>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+					</archive>
+					<webappDirectory>target/webapp</webappDirectory>
+				</configuration>
+			</plugin>
+        </plugins>
+    </build>
+    
+    <dependencies>
+    
+	    <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-server -->
+		<dependency>
+		    <groupId>com.sun.jersey</groupId>
+		    <artifactId>jersey-server</artifactId>
+		    <version>1.19.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-json -->
+		<dependency>
+		    <groupId>com.sun.jersey</groupId>
+		    <artifactId>jersey-json</artifactId>
+		    <version>1.19.1</version>
+		</dependency>
+		
+		
+	
+    </dependencies>
+    
+	
 </project>
