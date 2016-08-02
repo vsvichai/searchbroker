@@ -9,6 +9,5 @@ package com.github.searchbroker.rest;
  */
 public interface SearchBroker {
 	
-	Object search(String url, String keywords, String sort, String order, String pageId, String pageSize);
-
+	Object search(String apiUrl, String keyword, String sort, String order, String pageId, String pageSize);
 }

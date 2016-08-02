@@ -3,18 +3,26 @@
  */
 package com.github.searchbroker.rest.jersey;
 
-import org.springframework.stereotype.Component;
+import java.util.Map;
 
+import javax.ws.rs.core.MultivaluedMap;
+
+import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
+import com.github.searchbroker.rest.AbstractSearchBroker;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
 
 /**
  * @author Vichai Vun
  *
  */
 @Component("jerseySearchBroker")
-public class DefaultJerseySearchBroker implements JerseySearchBroker {
+public class DefaultJerseySearchBroker extends AbstractSearchBroker implements JerseySearchBroker {
 
 	/**
 	 * Default Constructor
@@ -23,28 +31,15 @@ public class DefaultJerseySearchBroker implements JerseySearchBroker {
 		super();
 	}
 
-	@Override
-	public ClientResponse search(final String url, final String keywords, final String sort, final String order, final String pageId,
-			final String pageSize) {
-
-			Client client = Client.create();
-
-			WebResource webResource = client
-					.resource("http://localhost:8080/RESTfulExample/rest/json/metallica/get");
-
-			ClientResponse response = webResource.accept("application/json")
-					.get(ClientResponse.class);
-
-//			if (response.getStatus() != 200) {
-//				throw new RuntimeException("Failed : HTTP error code : "
-//						+ response.getStatus());
-//			}
-//
-//			String output = response.getEntity(String.class);
-//
-//			System.out.println("Output from Server .... \n");
-//			System.out.println(output);
-			return response;
+	public ClientResponse search(final String apiUrl, final String keyword, final String sort, final String order, final String pageId,
+			final String pageSize) throws ClientHandlerException {
+		
+		Client client = Client.create();
+		client.setConnectTimeout(CONNECTION_TIMEOUT);
+		client.setReadTimeout(READ_TIMEOUT);
+		String requestUrl = buildRequestUrl(apiUrl, keyword, sort, order, pageId, pageSize);
+		WebResource webResource = client.resource(requestUrl);
+		ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
+		return response;
 	}
-
 }
