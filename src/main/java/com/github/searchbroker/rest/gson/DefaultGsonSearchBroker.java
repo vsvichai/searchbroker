@@ -22,7 +22,7 @@ public class DefaultGsonSearchBroker extends AbstractSearchBroker implements Gso
 	}
 
 	public Object search(final String url, final String keywords, final String sort, final String order, final String pageId,
-			final String pageSize) {
+			final String pageSize, final int connectionTimeOut, final int requestTimeOut) {
 //		try (CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
 //            HttpPost request = new HttpPost(url);
 //            StringEntity params = new StringEntity(body);
